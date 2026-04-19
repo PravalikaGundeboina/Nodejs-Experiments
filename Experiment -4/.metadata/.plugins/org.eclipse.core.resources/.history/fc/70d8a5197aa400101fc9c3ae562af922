@@ -1,0 +1,307 @@
+package sample;
+
+import java.util.Scanner;
+
+interface Bank {
+
+ void createAccount(String name, int accNo, double initialAmount);
+
+ void creditAmount(int accNo, double amount);
+
+ void debitAmount(int accNo, double amount);
+
+ void transferAmount(int fromAcc, int toAcc, double amount);
+
+ void miniStatement(int accNo);
+
+ double rateOfInterest(); 
+
+}
+
+class SBI implements Bank {
+
+ String name;
+
+ int accNo;
+
+ double balance;
+
+ public void createAccount(String name, int accNo, double initialAmount) {
+
+     this.name = name;
+
+     this.accNo = accNo;
+
+     this.balance = initialAmount;
+
+     System.out.println("SBI Account created successfully for " + name + " with A/C No: " + accNo);
+
+ }
+
+ public void creditAmount(int accNo, double amount) {
+
+     if (this.accNo == accNo) {
+
+         balance += amount;
+
+         System.out.println("Amount credited successfully. New Balance: " + balance);
+
+     } else {
+
+         System.out.println("Account not found.");
+
+     }
+
+ }
+
+ public void debitAmount(int accNo, double amount) {
+
+     if (this.accNo == accNo) {
+
+         if (balance >= amount) {
+
+             balance -= amount;
+
+             System.out.println("Amount debited successfully. New Balance: " + balance);
+
+         } else {
+
+             System.out.println("Insufficient balance.");
+
+         }
+
+     } else {
+
+         System.out.println("Account not found.");
+
+     }
+
+ }
+
+public void transferAmount(int fromAcc, int toAcc, double amount) {
+
+     if (this.accNo == fromAcc) {
+
+         if (balance >= amount) {
+
+             balance -= amount;
+
+             System.out.println("Amount transferred from " + fromAcc + " to " + toAcc + " successfully.");
+
+             System.out.println("New Balance: " + balance);
+
+         } else {
+
+             System.out.println("Insufficient balance.");
+
+         }
+
+     } else {
+
+         System.out.println("From Account not found.");
+
+     }
+
+ }
+
+public void miniStatement(int accNo) {
+
+     if (this.accNo == accNo) {
+
+         System.out.println("---- SBI Mini Statement ----");
+
+         System.out.println("Name: " + name);
+
+         System.out.println("Account No: " + this.accNo);
+
+         System.out.println("Balance: " + balance);
+
+     } else {
+
+         System.out.println("Account not found.");
+
+     }
+
+ }
+
+public double rateOfInterest() {
+
+     return 5.5; 
+
+ }
+
+}
+
+class Axis implements Bank {
+
+ String name;
+
+ int accNo;
+
+ double balance;
+
+public void createAccount(String name, int accNo, double initialAmount) {
+
+     this.name = name;
+
+     this.accNo = accNo;
+
+     this.balance = initialAmount;
+
+     System.out.println("Axis Account created successfully for " + name + " with A/C No: " + accNo);
+
+ }
+
+ public void creditAmount(int accNo, double amount) {
+
+     if (this.accNo == accNo) {
+
+         balance += amount;
+
+         System.out.println("Amount credited successfully. New Balance: " + balance);
+
+     } else {
+
+         System.out.println("Account not found.");
+
+     }
+
+ }
+
+ public void debitAmount(int accNo, double amount) {
+
+     if (this.accNo == accNo) {
+
+         if (balance >= amount) {
+
+             balance -= amount;
+
+             System.out.println("Amount debited successfully. New Balance: " + balance);
+
+         } else {
+
+             System.out.println("Insufficient balance.");
+
+         }
+
+     } else {
+
+         System.out.println("Account not found.");
+
+     }
+
+ }
+
+ public void transferAmount(int fromAcc, int toAcc, double amount) {
+
+     if (this.accNo == fromAcc) {
+
+         if (balance >= amount) {
+
+             balance -= amount;
+
+             System.out.println("Amount transferred from " + fromAcc + " to " + toAcc + " successfully.");
+
+             System.out.println("New Balance: " + balance);
+
+         } else {
+
+             System.out.println("Insufficient balance.");
+
+         }
+
+     } else {
+
+         System.out.println("From Account not found.");
+
+     }
+
+ }
+
+ public void miniStatement(int accNo) {
+
+     if (this.accNo == accNo) {
+
+         System.out.println("---- Axis Mini Statement ----");
+
+         System.out.println("Name: " + name);
+
+         System.out.println("Account No: " + this.accNo);
+
+         System.out.println("Balance: " + balance);
+
+     } else {
+
+         System.out.println("Account not found.");
+
+     }
+
+ }
+
+ public double rateOfInterest() {
+
+     return 6.0; 
+
+ }
+
+}
+
+public class BankInterfaceDemo {
+
+ public static void main(String[] args) {
+
+     Scanner sc = new Scanner(System.in);
+
+     Bank bank;
+
+     System.out.println("Choose Bank: 1. SBI 2. Axis");
+
+     int choice = sc.nextInt();
+
+     sc.nextLine(); 
+
+     if (choice == 1) {
+
+         bank = new SBI(); 
+
+     } else {
+
+         bank = new Axis(); 
+
+     }
+
+     System.out.print("Enter Name: ");
+
+     String name = sc.nextLine();
+
+     System.out.print("Enter Account Number: ");
+
+     int accNo = sc.nextInt();
+
+     System.out.print("Enter Initial Deposit: ");
+
+     double initial = sc.nextDouble();
+
+     bank.createAccount(name, accNo, initial);
+
+     System.out.print("Enter amount to credit: ");
+
+     double creditAmt = sc.nextDouble();
+
+     bank.creditAmount(accNo, creditAmt);
+
+     System.out.print("Enter amount to debit: ");
+
+     double debitAmt = sc.nextDouble();
+
+     bank.debitAmount(accNo, debitAmt);
+
+     bank.miniStatement(accNo);
+
+     System.out.println("Rate of Interest for this bank: " + bank.rateOfInterest() + "%");
+
+     sc.close();
+
+ }
+
+}

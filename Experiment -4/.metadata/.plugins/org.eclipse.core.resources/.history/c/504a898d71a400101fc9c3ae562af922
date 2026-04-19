@@ -1,0 +1,20 @@
+package sample;
+
+interface BankService {
+    void createAccount(String name);
+    void credit(double amount);
+    void debit(double amount);
+    void transfer(double amount, String toAccount);
+    void miniStatement();
+    double rateOfInterest = 4.5;
+}
+class SBI implements BankService {
+    public void createAccount(String name) {
+    	System.out.println("SBI Account created for " + name); 
+    	}
+    public void credit(double amt) { 
+    	System.out.println("SBI Credited: " + amt); 
+    	}
+    public void debit(double amt) { 
+    	
+    	System.out.println("SBI Debited: " + amt); 
