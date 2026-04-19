@@ -1,0 +1,18 @@
+<html>
+<body>
+
+<h2>Update Employee</h2>
+
+<form action="UpdateEmployeeServlet" method="get">
+
+ID: <input type="text" name="id" required><br><br>
+Name: <input type="text" name="name" required><br><br>
+Salary: <input type="text" name="salary" required><br><br>
+Field: <input type="text" name="field" required><br><br>
+
+<input type="submit" value="Update">
+
+</form>
+
+</body>
+</html>

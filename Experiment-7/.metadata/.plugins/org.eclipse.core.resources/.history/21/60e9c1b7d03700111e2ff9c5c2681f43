@@ -1,0 +1,34 @@
+package nodejs;
+
+
+
+public class Employee {
+
+    private int Emp_id;
+    private String Emp_Name;
+    private double Emp_Salary;
+    private String Emp_Field;
+
+    public Employee(int Emp_id, String Emp_Name, double Emp_Salary, String Emp_Field) {
+        this.Emp_id = Emp_id;
+        this.Emp_Name = Emp_Name;
+        this.Emp_Salary = Emp_Salary;
+        this.Emp_Field = Emp_Field;
+    }
+
+    public int getEmp_id() {
+        return Emp_id;
+    }
+
+    public String getEmp_Name() {
+        return Emp_Name;
+    }
+
+    public double getEmp_Salary() {
+        return Emp_Salary;
+    }
+
+    public String getEmp_Field() {
+        return Emp_Field;
+    }
+}

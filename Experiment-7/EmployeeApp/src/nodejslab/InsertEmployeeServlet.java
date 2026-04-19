@@ -1,0 +1,42 @@
+package nodejslab;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/InsertEmployeeServlet")
+public class InsertEmployeeServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        try {
+            String idStr = request.getParameter("id");
+            String name = request.getParameter("name");
+            String salaryStr = request.getParameter("salary");
+            String field = request.getParameter("field");
+
+            if (idStr == null || salaryStr == null ||
+                idStr.isEmpty() || salaryStr.isEmpty()) {
+                out.println("Error: Missing data!");
+                return;
+            }
+
+            int id = Integer.parseInt(idStr);
+            double salary = Double.parseDouble(salaryStr);
+
+            EmployeeDAO dao = new EmployeeDAO();
+            dao.insertEmployee(id, name, salary, field);
+
+            out.println("<h3>Employee Inserted Successfully!</h3>");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<h3>Error: " + e.getMessage() + "</h3>");
+        }
+    }
+}

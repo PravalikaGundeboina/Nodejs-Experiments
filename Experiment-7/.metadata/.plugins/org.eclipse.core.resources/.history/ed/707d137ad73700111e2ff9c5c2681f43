@@ -1,0 +1,84 @@
+package nodejslab;
+
+import java.sql.*;
+import java.util.*;
+
+public class EmployeeDAO {
+
+    static Connection getDBConnection() {
+        Connection connection = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/24WH1A05C6_Pravalika?serverTimezone=UTC",
+                "root",
+                "1234"
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return connection;
+    }
+
+    public List<Employee> getEmployees() {
+
+        List<Employee> list = new ArrayList<>();
+
+        try {
+            Connection con = getDBConnection();
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM Employee");
+
+            while (rs.next()) {
+                Employee e = new Employee(
+                        rs.getInt("Emp_id"),
+                        rs.getString("Emp_Name"),
+                        rs.getDouble("Emp_Salary"),
+                        rs.getString("Emp_Field")
+                );
+
+                list.add(e);
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+    public void updateEmployee(int id, String name, double salary, String field) {
+
+        try {
+            Connection con = getDBConnection();
+
+            PreparedStatement ps = con.prepareStatement(
+                "UPDATE Employee SET Emp_Name=?, Emp_Salary=?, Emp_Field=? WHERE Emp_id=?"
+            );
+
+            ps.setString(1, name);
+            ps.setDouble(2, salary);
+            ps.setString(3, field);
+            ps.setInt(4, id);
+
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("Update successful");
+            } else {
+                System.out.println("No record found with given ID");
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
