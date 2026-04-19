@@ -1,0 +1,41 @@
+package nodejs;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class Delete {
+    public static void main(String[] args) {
+        try {
+            // Step 1: register driver
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+
+            // Step 2: connect to database
+            Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/24wh1a05c6_pravalika",
+                "root",
+                "1234"
+            );
+
+            // Step 3: create statement
+            Statement statement = connection.createStatement();
+
+            // Step 4: execute DELETE query
+            int rowsDeleted = statement.executeUpdate(
+                "DELETE FROM employee WHERE Emp_id = 1005"
+            );
+
+            if (rowsDeleted > 0) {
+                System.out.println("Employee deleted successfully");
+            } else {
+                System.out.println("Employee not found");
+            }
+
+            // Step 5: close connection
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

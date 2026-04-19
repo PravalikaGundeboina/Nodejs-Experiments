@@ -1,0 +1,33 @@
+package nodejs;
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Update{
+public static void main(String[] args) {
+try{//step1:register te driver
+//DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+//step 2:Connect the server by supplying URL(ip,port,uname,pass)
+Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/24wh1a05c6_pravalika?serverTimezone=UTC","root","1234");
+//step 3:create statement object to send queries to db
+Statement statement=connection.createStatement();
+//step 4:execute query
+int rowsAffected = statement.executeUpdate("UPDATE employee SET Emp_Salary = 3000 WHERE Emp_id = 1004");
+
+if (rowsAffected > 0) {
+            System.out.println("Employee salary updated successfully");
+        } else {
+            System.out.println("No employee found with given ID");
+        }
+//step 5:close the connection
+connection.close();
+}
+catch(SQLException e){
+e.printStackTrace();
+}
+}
+}
