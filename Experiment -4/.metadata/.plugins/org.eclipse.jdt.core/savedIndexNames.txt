@@ -1,8 +1,0 @@
-INDEX VERSION 1.134+C:\Users\prava\OneDrive\Desktop\24WH1A05C6\.metadata\.plugins\org.eclipse.jdt.core
-3911597507.index
-3416853083.index
-2344809789.index
-969968605.index
-2569739232.index
-2373500367.index
-1865797976.index
